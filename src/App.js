@@ -8,6 +8,7 @@ import Signup from './Components/Signup/Signup';
 import Login from './Components/Login/Login';
 import ProtectedRoute from './Pages/Protected';
 import Create from './Components/Create/Create';
+import ProductDetail from './Components/ProductDetailPage/ProductDetail';
 
 function App() {
   return (
@@ -16,13 +17,29 @@ function App() {
         <Routes>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/create" element={<Create />} />
-          {/* Protect the home route */}
+          <Route path="/product/:id" element={<ProductDetail />} />
+          
           <Route 
             path="/" 
             element={
               <ProtectedRoute>
                 <Home />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/create" 
+            element={
+              <ProtectedRoute>
+                <Create />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/product/:id" 
+            element={
+              <ProtectedRoute>
+                <ProductDetail />
               </ProtectedRoute>
             } 
           />

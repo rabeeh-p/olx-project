@@ -3,6 +3,7 @@ import { db } from '../../firebase/config'; // Import your Firebase config
 import { collection, getDocs } from 'firebase/firestore'; // Firestore methods
 import Heart from '../../assets/Heart';
 import './Post.css';
+import { Link } from 'react-router-dom';
 
 function Posts() {
   const [products, setProducts] = useState([]);
@@ -26,15 +27,16 @@ function Posts() {
 
   return (
     <div className="postParentDiv">
-      <div className="moreView">
-        <div className="heading">
-          <span>Quick Menu</span>
-          <span>View more</span>
-        </div>
-        <div className="cards">
-          {products.length > 0 ? (
-            products.map((product) => (
-              <div className="card" key={product.id}>
+    <div className="moreView">
+      <div className="heading">
+        <span>Quick Menu</span>
+        <span>View more</span>
+      </div>
+      <div className="cards">
+        {products.length > 0 ? (
+          products.map((product) => (
+            <Link to={`/product/${product.id}`} key={product.id} className="cardLink">
+              <div className="card">
                 <div className="favorite">
                   <Heart />
                 </div>
@@ -50,43 +52,15 @@ function Posts() {
                   <span>{product.dateAdded}</span>
                 </div>
               </div>
-            ))
-          ) : (
-            <p>No products available</p>
-          )}
-        </div>
+            </Link>
+          ))
+        ) : (
+          <p>No products available</p>
+        )}
       </div>
-
-      {/* <div className="recommendations">
-        <div className="heading">
-          <span>Fresh recommendations</span>
-        </div>
-        <div className="cards">
-          {products.length > 0 ? (
-            products.map((product) => (
-              <div className="card" key={product.id}>
-                <div className="favorite">
-                  <Heart />
-                </div>
-                <div className="image">
-                  <img src={product.imageUrl || "../../../Images/default.jpg"} alt={product.name} />
-                </div>
-                <div className="content">
-                  <p className="rate">&#x20B9; {product.price}</p>
-                  <span className="kilometer">{product.category || 'Category'}</span>
-                  <p className="name">{product.name}</p>
-                </div>
-                <div className="date">
-                  <span>{product.dateAdded}</span>
-                </div>
-              </div>
-            ))
-          ) : (
-            <p>No recommendations available</p>
-          )}
-        </div>
-      </div> */}
     </div>
+  </div>
+  
   );
 }
 
