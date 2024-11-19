@@ -1,41 +1,64 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 
 import Logo from '../../olx-logo.png';
 import './Login.css';
+import { FirebaseContext } from '../../store/FirebaseContext';
+import { useNavigate } from 'react-router-dom';
+import { signInWithEmailAndPassword } from 'firebase/auth'; 
 
 function Login() {
+  const [email,setEmail] = useState('')
+  const [password,setPassword] = useState('')
+  const { auth } = useContext(FirebaseContext);
+  const naviagte = useNavigate()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log('Logged in as:', userCredential.user);
+      naviagte('/')
+    } catch (error) {
+      console.error('Error signing in:', error.message);
+      alert(error.message);
+    }
+  };
   return (
+
     <div>
       <div className="loginParentDiv">
-        <img width="200px" height="200px" src={Logo}></img>
-        <form>
-          <label htmlFor="fname">Email</label>
+        <img width="150px" height="150px" src={Logo} alt="logo" />
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="email">Email</label>
           <br />
           <input
             className="input"
+            onChange={(e)=>setEmail(e.target.value)}
             type="email"
-            id="fname"
+            id="email"
             name="email"
-            defaultValue="John"
+            placeholder="Enter your email"
           />
           <br />
-          <label htmlFor="lname">Password</label>
+          <label htmlFor="password">Password</label>
           <br />
           <input
+          onChange={(e)=>setPassword(e.target.value)}
             className="input"
             type="password"
-            id="lname"
+            id="password"
             name="password"
-            defaultValue="Doe"
+            placeholder="Enter your password"
           />
           <br />
           <br />
-          <button>Login</button>
+          <button type="submit">Login</button>
         </form>
-        <a>Signup</a>
+        <a href="/signup">Signup</a>
       </div>
     </div>
   );
+  
 }
 
 export default Login;
