@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './Header.css';
 import OlxLogo from '../../assets/OlxLogo';
 import Search from '../../assets/Search';
@@ -13,54 +12,48 @@ import { useNavigate } from 'react-router-dom';
 function Header() {
   const navigate = useNavigate();
 
+  const handleClick = () => {
+    navigate('/create');
+  };
+
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      localStorage.removeItem('user'); 
-      navigate('/login'); 
+      localStorage.removeItem('user');
+      navigate('/login');
     } catch (error) {
       console.error('Error during logout:', error.message);
     }
   };
+
   return (
-    <div className="headerParentDiv">
-      <div className="headerChildDiv">
-        <div className="brandName">
+    <div className="header-container">
+      <div className="header-content">
+        {/* Logo */}
+        <div className="header-logo">
           <OlxLogo />
         </div>
-        <div className="placeSearch">
+
+        {/* Search Bar */}
+        <div className="search-box">
           <Search />
-          <input type="text" />
+          <input type="text" placeholder="Search for products, services..." />
           <Arrow />
         </div>
-        <div className="productSearch">
-          <div className="input">
-            <input type="text" placeholder="Find car, mobile phone and more..." />
-          </div>
-          <div className="searchAction">
-            <Search color="#ffffff" />
-          </div>
-        </div>
-        <div className="language">
-          <span>ENGLISH</span>
-          <Arrow />
-        </div>
-        <div className="loginPage">
-        <span onClick={handleLogout} style={{ cursor: 'pointer' }}>Logout</span>
-        </div>
-  
-        <div className="sellMenu">
-          <SellButton />
-          <div className="sellMenuContent">
-            <SellButtonPlus />
-            <span>SELL</span>
+
+        {/* Auth and Sell Buttons */}
+        <div className="actions">
+          <span onClick={handleLogout} className="logout-btn">Logout</span>
+          <div className="sell-btn" onClick={handleClick}>
+            <div className="sell-btn-content">
+              <SellButtonPlus />
+              <span>SELL</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
-  
-  
 }
 
 export default Header;

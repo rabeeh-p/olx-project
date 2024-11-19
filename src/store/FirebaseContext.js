@@ -3,6 +3,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { auth } from '../firebase/config'; 
 
+
 export const FirebaseContext = createContext(null);
 
 export const FirebaseProvider = ({ children }) => {
