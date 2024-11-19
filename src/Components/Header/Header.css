@@ -1,0 +1,214 @@
+/* Header and child divs */
+.headerParentDiv {
+  padding: 10px;
+  background-color: whitesmoke;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  box-sizing: border-box; /* Added for better box-sizing */
+  overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+.headerChildDiv {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Allow elements to wrap on smaller screens */
+  padding: 0 10px; /* Added padding to prevent overflow from content */
+  box-sizing: border-box; /* Ensure padding doesn't cause overflow */
+}
+
+.placeSearch,
+.productSearch {
+  height: 48px;
+  border: 2px solid #002f34;
+  border-radius: 4px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  margin: 5px 0;
+  box-sizing: border-box;
+  flex-grow: 1; /* Allow elements to expand based on available space */
+}
+
+/* Place search */
+.placeSearch {
+  width: 100%;  /* Full width of its container */
+  max-width: 16em;  /* Max width to prevent overflow */
+  margin-right: 10px;  /* Add space between search boxes */
+}
+
+.placeSearch input {
+  border-color: transparent;
+  outline-color: transparent;
+  width: 100%; /* Make input take full width of its parent */
+}
+
+.placeSearch ::selection {
+  border-color: #23e5db;
+  outline-color: #23e5db;
+}
+
+/* Product search */
+.productSearch {
+  width: 100%;  /* Full width of its container */
+  max-width: 35em;  /* Max width to prevent overflow */
+  justify-content: space-between;
+  flex-grow: 1;
+  margin-left: 10px; /* Add space between search boxes */
+}
+
+.productSearch .input input {
+  border-color: transparent;
+  outline-color: transparent;
+  width: 100%;  /* Ensure input takes full width of its container */
+}
+
+.productSearch .searchAction {
+  min-width: 48px;
+  height: 48px;
+  display: flex;
+  cursor: pointer;
+  background-color: #002f34;
+  border-radius: 0 4px 4px 0;
+}
+
+.productSearch .searchAction svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  fill: white;
+}
+
+/* Language section */
+.language {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.language span {
+  font-size: 15px;
+  font-weight: bolder;
+  margin-right: 5px;
+}
+
+/* Login page styling */
+.loginPage hr {
+  margin: 0;
+  background-color: black;
+  height: 2px;
+}
+
+.loginPage a {
+  text-decoration: none;
+}
+
+/* Sell menu */
+.sellMenu {
+  position: relative;
+  cursor: pointer;
+}
+
+.sellMenu .all {
+  fill: white;
+}
+
+.sellMenu .top {
+  fill: #23e5db;
+}
+
+.sellMenu .left {
+  fill: #ffce32;
+}
+
+.sellMenu .right {
+  fill: #3a77ff;
+}
+
+.sellMenu .sellMenuContent {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #002f34;
+}
+
+.sellMenu .sellMenuContent span {
+  margin-left: 5px;
+}
+
+/* Media Queries for Responsiveness */
+
+/* Mobile view adjustments */
+@media only screen and (max-width: 700px) {
+  .placeSearch,
+  .productSearch {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 0 15px; /* Increased padding for better spacing */
+  }
+
+  .productSearch {
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .productSearch .searchAction {
+    width: 100%;
+    border-radius: 4px;
+    margin-top: 5px; /* Added margin to avoid overlap */
+  }
+
+  .language {
+    width: 100%;
+    justify-content: center;
+    padding: 0 10px; /* Added padding for spacing */
+  }
+
+  .headerChildDiv {
+    flex-direction: column;
+    align-items: stretch; /* Adjusted for better space distribution */
+    padding: 10px 0; /* Added padding for better spacing */
+  }
+
+  /* Hide the sell menu on mobile */
+  .sellMenu {
+    display: none;
+  }
+}
+
+/* Tablet view adjustments */
+@media only screen and (max-width: 1024px) {
+  .placeSearch,
+  .productSearch {
+    width: 90%;
+    margin-bottom: 10px;
+    padding: 0 10px; /* Added padding to prevent overflow */
+  }
+
+  .productSearch {
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+
+  .productSearch .searchAction {
+    width: 100%;
+    border-radius: 4px;
+  }
+
+  .sellMenu {
+    display: none; /* Optionally hide the sell menu */
+  }
+}
