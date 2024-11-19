@@ -16,7 +16,8 @@ function Login() {
     e.preventDefault();
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log('Logged in as:', userCredential.user);
+      const user = userCredential.user;
+      localStorage.setItem('user', JSON.stringify(user));
       naviagte('/')
     } catch (error) {
       console.error('Error signing in:', error.message);

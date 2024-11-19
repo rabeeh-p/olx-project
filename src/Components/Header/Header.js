@@ -6,7 +6,22 @@ import Search from '../../assets/Search';
 import Arrow from '../../assets/Arrow';
 import SellButton from '../../assets/SellButton';
 import SellButtonPlus from '../../assets/SellButtonPlus';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebase/config';
+import { useNavigate } from 'react-router-dom';
+
 function Header() {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      localStorage.removeItem('user'); 
+      navigate('/login'); 
+    } catch (error) {
+      console.error('Error during logout:', error.message);
+    }
+  };
   return (
     <div className="headerParentDiv">
       <div className="headerChildDiv">
@@ -31,8 +46,7 @@ function Header() {
           <Arrow />
         </div>
         <div className="loginPage">
-          <span>Login</span>
-          <hr />
+        <span onClick={handleLogout} style={{ cursor: 'pointer' }}>Logout</span>
         </div>
   
         <div className="sellMenu">
