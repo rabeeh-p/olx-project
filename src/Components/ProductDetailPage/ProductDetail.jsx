@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'; // Import useParams to get the product ID from the URL
-import { db } from '../../firebase/config'; // Import your Firebase config
-import { doc, getDoc } from 'firebase/firestore'; // Firestore methods
+import { useParams } from 'react-router-dom'; 
+import { db } from '../../firebase/config'; 
+import { doc, getDoc } from 'firebase/firestore'; 
 import './productDetail.css';
 import Header from '../Header/Header';
 
 function ProductDetail() {
-  const { id } = useParams(); // Get the product ID from the URL
+  const { id } = useParams(); 
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const docRef = doc(db, 'products', id); // Get the document reference by ID
+        const docRef = doc(db, 'products', id); 
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          setProduct(docSnap.data()); // Set the product data to state
+          setProduct(docSnap.data()); 
         } else {
           console.log("No such document!");
         }

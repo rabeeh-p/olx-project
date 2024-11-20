@@ -3,8 +3,7 @@ import { db, auth } from '../../firebase/config';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './Create.css'; // Import CSS file for styling
-
+import './Create.css'; 
 function PostProduct() {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
@@ -13,11 +12,10 @@ function PostProduct() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // Cloudinary upload function
   const uploadToCloudinary = async (file) => {
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('upload_preset', process.env.REACT_APP_CLOUDINARY_PRESET); // Your unsigned preset name
+    formData.append('upload_preset', process.env.REACT_APP_CLOUDINARY_PRESET); 
 
     try {
       const response = await axios.post(
@@ -33,22 +31,18 @@ function PostProduct() {
   };
 
   const validateInputs = () => {
-    // Reset the error message
     setError('');
 
-    // Check if fields are empty
     if (!name || !price || !description || !file) {
       setError('All fields are required.');
       return false;
     }
 
-    // Validate price is a positive number
     if (isNaN(price) || parseFloat(price) <= 0) {
       setError('Price must be a positive number.');
       return false;
     }
 
-    // Validate file type (image only)
     if (!file.type.startsWith('image/')) {
       setError('Please select a valid image file.');
       return false;
@@ -65,9 +59,8 @@ function PostProduct() {
       return;
     }
 
-    // Validate inputs before proceeding
     if (!validateInputs()) {
-      return; // Don't submit the form if validation fails
+      return; 
     }
 
     try {
@@ -83,7 +76,7 @@ function PostProduct() {
       });
 
       alert('Product posted successfully!');
-      navigate('/'); // Navigate to the home page after success
+      navigate('/'); 
     } catch (error) {
       console.error('Error posting product:', error);
       alert('Error posting product. Please try again.');
@@ -94,7 +87,6 @@ function PostProduct() {
     <div className="postProductForm">
       <h2 className="formTitle">Post Your Product</h2>
 
-      {/* Error message display */}
       {error && <div className="error-message">{error}</div>}
 
       <form onSubmit={handleSubmit}>

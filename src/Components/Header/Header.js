@@ -3,7 +3,6 @@ import './Header.css';
 import OlxLogo from '../../assets/OlxLogo';
 import Search from '../../assets/Search';
 import Arrow from '../../assets/Arrow';
-import SellButton from '../../assets/SellButton';
 import SellButtonPlus from '../../assets/SellButtonPlus';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase/config';
@@ -27,21 +26,18 @@ function Header() {
   };
 
   return (
-    <div className="header-container">
+    <div className="header-container" >
       <div className="header-content">
-        {/* Logo */}
-        <div className="header-logo">
+        <div className="header-logo"onClick={()=>navigate('/')}>
           <OlxLogo />
         </div>
 
-        {/* Search Bar */}
         <div className="search-box">
           <Search />
           <input type="text" placeholder="Search for products, services..." />
           <Arrow />
         </div>
 
-        {/* Auth and Sell Buttons */}
         <div className="actions">
           <span onClick={handleLogout} className="logout-btn">Logout</span>
           <div className="sell-btn" onClick={handleClick}>

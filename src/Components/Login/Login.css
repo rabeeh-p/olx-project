@@ -62,7 +62,6 @@
   text-decoration: underline;
 }
 
-/* Media Queries for Smaller Screens */
 @media (max-width: 600px) {
   .loginParentDiv {
     padding: 15px;
